@@ -1,7 +1,8 @@
-       alias ls='ls --color=auto'
-        alias atualizar='sudo apt-get update'
-        alias instalar='sudo apt-get install "$1"'
-        alias grep='grep --colour=auto'
+#!/bin/bash
+alias ls='ls --color=auto'
+         alias atualizar='sudo apt-get update'
+                         alias instalar='sudo apt-get install "$1"'
+                                        alias grep='grep --colour=auto'
 
  chkvazio(){
 if [ -z $1 ]
