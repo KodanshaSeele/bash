@@ -5,20 +5,14 @@ alias ls='ls --color=auto'
                                         alias grep='grep --colour=auto'
 
  chkvazio(){
-if [ -z $1 ]
-then
-    dialog --title "erro" --msgbox "$1 - variavel vazia!!!" 40 40
-read -p "$1 - vazio enter para sair"
-exit
-else
-    echo "ok"
-fi
+test $# != 0 || echo "$1" && exit
 }
 
 ytm () {
 	dpkg -l | grep "youtube-dl" 2>&1 >/dev/null
 	[ $? == "1" ] && echo "youtube-dl nao instalado, favor corrigir"
 	cd /home/$USER/Música || echo "nao foi possivel acessar a pasta /home/$USER/Música, favor verificar" && break
+	chkvazio "link youtube nao especificado"
 	youtube-dl --ignore-errors --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" "$1"
 }
 
@@ -26,6 +20,7 @@ ytml () {
 	dpkg -l | grep "youtube-dl" 2>&1 >/dev/null
 	[ $? == "1" ] && echo "youtube-dl nao instalado, favor corrigir"
 	cd /home/$USER/Música || echo "nao foi possivel acessar a pasta /home/$USER/Música, favor verificar" && break
+	test $# != 0 || echo "link youtube nao especificado" && sleep 3 && exit 
 	youtube-dl --ignore-errors --extract-audio --audio-format mp3 --output "%(title)s.%(ext)s" --yes-playlist "$1"
 }
 
